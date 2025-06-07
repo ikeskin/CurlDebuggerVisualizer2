@@ -1,6 +1,6 @@
 # CurlDebuggerVisualizer2
 
-A Visual Studio debugger visualizer to inspect `HttpResponseMessage` objects with a modern UI using WPF and WebView2.
+A Visual Studio debugger visualizer to inspect `HttpResponseMessage` objects with a modern UI using WPF and WebView2. JSON responses are rendered with syntax highlighting via **highlight.js** inside a WebView2 control.
 
 ## Building
 
@@ -22,7 +22,7 @@ Restart Visual Studio if it was running.
 2. Place a breakpoint after receiving the `HttpResponseMessage`.
 3. Start debugging and when the breakpoint hits, hover over the variable or add it to the Watch window.
 4. Click the magnifier icon to launch the **CurlDebuggerVisualizer2** window.
-5. Inspect the cURL command, raw response, and pretty JSON in the visualizer.
+5. Inspect the cURL command, raw response, and syntax-highlighted JSON in the visualizer.
 
 ## Repository Structure
 
