@@ -1,18 +1,24 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurlDebuggerVisualizer", "CurlDebuggerVisualizer\CurlDebuggerVisualizer.csproj", "{566E7877-32DA-44E2-A6BE-30D8439CD50A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurlDebuggerVisualizer.VSIX", "CurlDebuggerVisualizer.VSIX\CurlDebuggerVisualizer.VSIX.csproj", "{D7C23F8A-2744-4317-8107-A8A2E2FD160B}"
+EndProject
 Global
-    GlobalSection(SolutionConfigurationPlatforms) = preSolution
-        Debug|Any CPU = Debug|Any CPU
-        Release|Any CPU = Release|Any CPU
-    EndGlobalSection
-    GlobalSection(ProjectConfigurationPlatforms) = postSolution
-        {566E7877-32DA-44E2-A6BE-30D8439CD50A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-        {566E7877-32DA-44E2-A6BE-30D8439CD50A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-        {566E7877-32DA-44E2-A6BE-30D8439CD50A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-        {566E7877-32DA-44E2-A6BE-30D8439CD50A}.Release|Any CPU.Build.0 = Release|Any CPU
-    EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{566E7877-32DA-44E2-A6BE-30D8439CD50A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{566E7877-32DA-44E2-A6BE-30D8439CD50A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{566E7877-32DA-44E2-A6BE-30D8439CD50A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{566E7877-32DA-44E2-A6BE-30D8439CD50A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7C23F8A-2744-4317-8107-A8A2E2FD160B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7C23F8A-2744-4317-8107-A8A2E2FD160B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7C23F8A-2744-4317-8107-A8A2E2FD160B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7C23F8A-2744-4317-8107-A8A2E2FD160B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 EndGlobal

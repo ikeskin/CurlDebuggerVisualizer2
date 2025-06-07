@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeAssemblyInVSIXContainer>false</IncludeAssemblyInVSIXContainer>
+    <UseCodebase>true</UseCodebase>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.5.3340" PrivateAssets="all" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="source.extension.vsixmanifest" />
+    <Content Include="..\CurlDebuggerVisualizer\bin\$(Configuration)\net48\CurlDebuggerVisualizer2.dll">
+      <Link>CurlDebuggerVisualizer2.dll</Link>
+    </Content>
+  </ItemGroup>
+</Project>

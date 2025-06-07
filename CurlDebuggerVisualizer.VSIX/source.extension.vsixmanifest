@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011">
+  <Metadata>
+    <Identity Id="CurlDebuggerVisualizer2" Version="1.0" Language="en-US" Publisher="Sample" />
+    <DisplayName>Curl Debugger Visualizer</DisplayName>
+    <Description>Debugger visualizer for HttpResponseMessage objects.</Description>
+  </Metadata>
+  <Installation>
+    <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[16.0,18.0)" />
+  </Installation>
+  <Dependencies>
+    <Dependency Id="Microsoft.Framework.NDP" Version="[4.8,)" DisplayName=".NET Framework" />
+  </Dependencies>
+  <Assets>
+    <Asset Type="File" Path="CurlDebuggerVisualizer2.dll" />
+  </Assets>
+</PackageManifest>

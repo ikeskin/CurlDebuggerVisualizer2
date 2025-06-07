@@ -6,6 +6,14 @@ A Visual Studio debugger visualizer to inspect `HttpResponseMessage` objects wit
 
 Open `CurlDebuggerVisualizer.sln` with Visual Studio 2022 and restore NuGet packages. The project targets **.NET Framework 4.8** and requires the **WebView2** runtime.
 
+### Building a VSIX Package
+
+The solution includes a `CurlDebuggerVisualizer.VSIX` project that packages the
+visualizer as a VSIX extension. You can build it locally with Visual Studio or
+let GitHub Actions build it for you. On every push or pull request to `main` or
+`master`, the workflow located at `.github/workflows/build-vsix.yml` will run and
+produce a VSIX artifact.
+
 ## Deploying
 
 After building the project, copy `CurlDebuggerVisualizer2.dll` from the `bin/Release` folder to:
