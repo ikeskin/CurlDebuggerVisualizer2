@@ -1,0 +1,24 @@
+name: Build VSIX
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.1
+      - name: Restore
+        run: msbuild CurlDebuggerVisualizer.sln /t:Restore
+      - name: Build
+        run: msbuild CurlDebuggerVisualizer.sln /p:Configuration=Release
+      - name: Archive VSIX
+        uses: actions/upload-artifact@v3
+        with:
+          name: CurlDebuggerVisualizer
+          path: CurlDebuggerVisualizer.VSIX/bin/Release/*.vsix
