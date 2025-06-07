@@ -1,89 +1,129 @@
-# Task: Build a modern cURL Debugger Visualizer for Visual Studio
+# Task: Build a Modern cURL Debugger Visualizer for Visual Studio (ikeskin/CurlDebuggerVisualizer2)
 
 ## Context
-We want to build a modern, user-friendly Debugger Visualizer for Visual Studio (2022), which allows developers to inspect `HttpResponseMessage` objects in a friendly UI:
-- It should display:
-    - A generated `cURL` command equivalent for the request
-    - The full raw HTTP response (headers + body)
-    - A pretty-formatted JSON response (if applicable)
+This project aims to create a modern and user-friendly Visual Studio Debugger Visualizer named **CurlDebuggerVisualizer2**, to inspect `HttpResponseMessage` objects with a professional UI experience.
+
+Inspired by tools like Sentry and Postman, this visualizer will provide developers with the ability to:
+- See the equivalent cURL command for any HTTP request
+- View the full raw HTTP response (status line, headers, body)
+- View a pretty-formatted JSON response (if applicable), with collapsible tree view (future version)
 
 ## Requirements
 
-1️⃣ Create a Visual Studio Debugger Visualizer project:
+### Project Setup
+- Project Name: `CurlDebuggerVisualizer2`
 - Target Framework: `.NET Framework 4.8`
-- Project type: WPF Class Library
+- Project type: **WPF Class Library**  
+  Reason: to support modern UI via `WebView2` and WPF styling
 - Dependencies:
-    - `Microsoft.VisualStudio.DebuggerVisualizers.dll` (reference)
-    - NuGet: `Microsoft.Web.WebView2` (latest stable)
+    - Reference: `Microsoft.VisualStudio.DebuggerVisualizers.dll`
+    - NuGet Package: `Microsoft.Web.WebView2`
 
-2️⃣ Implement a `DialogDebuggerVisualizer`:
+### Core Functionalities
+
+✅ Implement `DialogDebuggerVisualizer`:
 - Target type: `HttpResponseMessage`
 - In `Show()` method:
     - Extract `HttpResponseMessage` via `IVisualizerObjectProvider3.GetObject<HttpResponseMessage>()`
     - Build:
-        - `cURL` string (HttpRequestMessage → cURL)
-        - Raw Response string (Status line + Headers + Body)
-        - Pretty JSON (if Content-Type is `application/json`)
+        - cURL command string
+        - Raw HTTP response string
+        - Pretty JSON string (if Content-Type is `application/json`)
 
-3️⃣ Implement a WPF Window (Dialog):
-- Name: `CurlResponseVisualizerForm`
+✅ Implement `CurlResponseVisualizerForm` (WPF Window):
 - Contains a `WebView2` control
-- Load an HTML template with:
+- Loads an HTML template with:
     - Bootstrap-based tabbed UI:
-        - Tab 1: cURL Command
-        - Tab 2: Raw Response
-        - Tab 3: Pretty JSON
-    - Simple Copy buttons (JS-based)
+        - **Tab 1:** cURL Command
+        - **Tab 2:** Raw Response
+        - **Tab 3:** Pretty JSON (initially basic, collapsible in later commit)
+    - Simple Copy-to-Clipboard buttons per tab (planned for later commit)
 
-4️⃣ HTML template:
-- Use Bootstrap 5 for tabs
-- Use Highlight.js for JSON syntax highlighting (collapsible not required for first version)
-- Include placeholder tokens:
-    - `{{CURL_COMMAND}}`
-    - `{{RAW_RESPONSE}}`
-    - `{{PRETTY_JSON}}`
-- Replace placeholders dynamically via C# when injecting content into WebView2.
+✅ HTML Template:
+- `Assets/template.html`:
+    - Bootstrap 5 for layout
+    - Highlight.js for JSON syntax highlighting (planned for later commit)
+    - Placeholders:
+        - `{{CURL_COMMAND}}`
+        - `{{RAW_RESPONSE}}`
+        - `{{PRETTY_JSON}}`
+    - Placeholders dynamically replaced in C# → injected into WebView2
 
-5️⃣ Create a `CurlHelper.cs` class:
-- `ToCurlCommand(HttpRequestMessage request)` → generate equivalent cURL command as string
-- `ToRawResponse(HttpResponseMessage response)` → generate full HTTP response as string
-- `ToPrettyJson(string json)` → pretty-print JSON (using Newtonsoft.Json)
+✅ `CurlHelper.cs` class:
+- `ToCurlCommand(HttpRequestMessage request)`
+- `ToRawResponse(HttpResponseMessage response)`
+- `ToPrettyJson(string json)`
 
-6️⃣ Prepare a README.md:
-- Explain how to build the project
-- How to deploy to `%USERPROFILE%\Documents\Visual Studio 2022\Visualizers\`
-- How to test in Visual Studio (debug a project with `HttpResponseMessage`, use magnifier icon to launch visualizer)
+✅ README.md:
+- How to build the project
+- How to deploy:
+    - Copy `CurlDebuggerVisualizer2.dll` to:
+    ```
+    %USERPROFILE%\Documents\Visual Studio 2022\Visualizers\
+    ```
+- How to test:
+    - Debug a project with `HttpResponseMessage`
+    - Use magnifier icon (Debugger Visualizer) to launch CurlDebuggerVisualizer2
 
-7️⃣ Stretch goal (optional, later commit):
-- Add collapsible JSON with Highlight.js or json-viewer
-- Add Copy-to-Clipboard buttons per tab
-- Add dark mode theme
+## Commit Strategy
+
+### First Commit
+- Functional version:
+    - cURL tab working
+    - Raw Response tab working
+    - Pretty JSON tab working (non-collapsible)
+
+### Second Commit (Planned)
+- Enhance UI:
+    - Collapsible JSON using Highlight.js or json-viewer
+    - Copy-to-Clipboard buttons
+    - Improved styling
+    - Dark mode support (optional)
 
 ## Constraints
-- Initial version must be functional and buildable with standard Visual Studio 2022 + WebView2 + WPF setup.
-- The first commit should implement a basic working version without collapsible JSON or advanced styling.
-- Second commit can enhance the UI.
+- Solution must build successfully with Visual Studio 2022.
+- First commit must provide a working end-to-end experience.
+- Second commit focuses on enhanced UX.
 
-## Output
-- A GitHub repo structured as:
-    - `CurlDebuggerVisualizer.sln`
-    - `CurlDebuggerVisualizer` project with:
-        - `CurlResponseVisualizer.cs`
-        - `CurlHelper.cs`
-        - `CurlResponseVisualizerForm.xaml` + `.cs`
-        - `Assets/template.html`
-    - `README.md`
-
-## Goal
-Provide developers with a modern, professional Debugger Visualizer for HttpResponseMessage objects, similar to Sentry or Postman UI quality.
+## Goals
+Provide a **professional, modern Debugger Visualizer** that gives Visual Studio users a better way to inspect `HttpResponseMessage` objects, helping developers debug REST APIs effectively.
 
 ---
 
-# Example Input:
-An HttpResponseMessage captured during debug.
+# Example Usage:
 
-# Example Output:
-A modern WPF Window with WebView2:
-- cURL tab → ready to copy
-- Raw Response tab → readable HTTP dump
-- Pretty JSON tab → formatted JSON if applicable
+**When debugging in Visual Studio:**
+
+1. Place breakpoint after an `HttpClient` call returning an `HttpResponseMessage`.
+2. Hover over the variable or add to Watch window.
+3. Click the magnifier (Debugger Visualizer).
+4. CurlDebuggerVisualizer2 will open a window displaying:
+    - cURL Command
+    - Raw HTTP Response
+    - Pretty JSON view (if applicable)
+
+---
+
+# Repository Structure:
+
+CurlDebuggerVisualizer2
+├── CurlDebuggerVisualizer.sln
+├── CurlDebuggerVisualizer (WPF Class Library)
+│ ├── CurlResponseVisualizer.cs
+│ ├── CurlResponseVisualizerForm.xaml / .cs
+│ ├── CurlHelper.cs
+│ ├── Assets/template.html
+├── README.md
+└── PROMPT.md (this file)
+
+
+---
+
+# Final Note
+This project is designed to serve as a reusable template for other Debugger Visualizers in Visual Studio, combining modern UI with practical debugging utilities.
+
+---
+
+**Contributed by:**  
+[@ikeskin](https://github.com/ikeskin)  
+(Generated task prompt template by AI assistant to capture project goals.)
